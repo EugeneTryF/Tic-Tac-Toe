@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tic_Tac_Toe.Views.TurnPage">
+
+    <StackLayout>
+        <Label HorizontalOptions="CenterAndExpand" Margin="0,0,0,80" Text="My turn" />
+        <Grid ColumnDefinitions="*,*"
+              ColumnSpacing="5"
+              RowDefinitions="*,Auto">
+            <Border Grid.Column="0"
+                    WidthRequest="125"
+                    HeightRequest="125">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Button_Clicked" />
+                </Border.GestureRecognizers>
+                <Image Aspect="AspectFill" 
+                   Source="cross.svg"/>
+            </Border>
+
+            <Border Grid.Column="1"
+                    WidthRequest="125"
+                    HeightRequest="125">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Button_Clicked" />
+                </Border.GestureRecognizers>
+                <Image Aspect="AspectFill" 
+                   Source="circle.svg"/>
+            </Border>
+            
+        </Grid>
+    </StackLayout>
+
+</ContentPage>
