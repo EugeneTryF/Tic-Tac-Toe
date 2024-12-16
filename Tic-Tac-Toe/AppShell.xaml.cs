@@ -1,10 +1,16 @@
-﻿namespace Tic_Tac_Toe
+﻿using Tic_Tac_Toe.Views;
+
+namespace Tic_Tac_Toe;
+
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+
+        Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+        Routing.RegisterRoute(nameof(GameModePage), typeof(GameModePage));
+        Routing.RegisterRoute(nameof(TurnPage), typeof(TurnPage));
+        Routing.RegisterRoute(nameof(GamePage), typeof(GamePage));
     }
 }
