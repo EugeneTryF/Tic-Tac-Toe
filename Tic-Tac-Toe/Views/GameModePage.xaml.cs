@@ -9,6 +9,6 @@ public partial class GameModePage : ContentPage
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(TurnPage), true, new Dictionary<string, object> { });
+        await Shell.Current.GoToAsync("//TurnPage");
     }
 }

@@ -9,6 +9,6 @@ public partial class MainPage : ContentPage
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(GameModePage), true, new Dictionary<string, object> { });
+        await Shell.Current.GoToAsync("//GameModePage");
     }
 }
