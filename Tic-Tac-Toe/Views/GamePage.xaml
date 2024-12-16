@@ -3,24 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Tic_Tac_Toe.Views.GamePage">
     <StackLayout>
-        <Grid ColumnDefinitions="*,*,*,*,*,*"
+        <Grid ColumnDefinitions="*,*"
               ColumnSpacing="5"
-              Margin="10">
+              Margin="10,10,10,100">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Label Text="Turn" FontSize="Large" VerticalTextAlignment="Center" Grid.Column="0"></Label>
-            <Image Aspect="Fill" 
-                   Source="cross.svg"
-                   Grid.Column="1"/>
-            <Button Text="Logout" Grid.ColumnSpan="5" Grid.Column="4" Clicked="Button_Clicked"></Button>
+            <HorizontalStackLayout>
+                <Label Text="Turn" FontSize="Large" VerticalTextAlignment="Center" Grid.Column="0"></Label>
+                <Image Aspect="AspectFill" 
+                       Source="cross.png" 
+                       Grid.Column="1"/>
+            </HorizontalStackLayout>
+            
+            <Button Text="Logout" MaximumWidthRequest="100" Grid.Column="1" HorizontalOptions="End" Clicked="Button_Clicked"></Button>
             
         </Grid>
-        <Grid ColumnDefinitions="100,*,*"
+        <Grid ColumnDefinitions="100,100,100"
               ColumnSpacing="5"
               RowDefinitions="100,100,100"
               RowSpacing="5"
-              Margin="50,150,50,50"
+              HorizontalOptions="Center"
               BackgroundColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}">
             <BoxView Grid.Row="0" Grid.Column="0" Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
             <BoxView Grid.Row="0" Grid.Column="1" Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
