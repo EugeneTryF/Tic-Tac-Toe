@@ -6,10 +6,30 @@
 
     <StackLayout>
         <Label HorizontalOptions="CenterAndExpand" Margin="0,0,0,80" Text="My turn" />
-        <HorizontalStackLayout Spacing="20">
-            <Button HorizontalOptions="Center" WidthRequest="300" Text="X" Clicked="Button_Clicked"></Button>
-            <Button HorizontalOptions="Center" WidthRequest="300" Text="O" Clicked="Button_Clicked"></Button>
-        </HorizontalStackLayout>
+        <Grid ColumnDefinitions="*,*"
+              ColumnSpacing="5"
+              RowDefinitions="*,Auto">
+            <Border Grid.Column="0"
+                    WidthRequest="125"
+                    HeightRequest="125">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Button_Clicked" />
+                </Border.GestureRecognizers>
+                <Image Aspect="AspectFill" 
+                   Source="cross.svg"/>
+            </Border>
+
+            <Border Grid.Column="1"
+                    WidthRequest="125"
+                    HeightRequest="125">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Button_Clicked" />
+                </Border.GestureRecognizers>
+                <Image Aspect="AspectFill" 
+                   Source="circle.svg"/>
+            </Border>
+            
+        </Grid>
     </StackLayout>
 
 </ContentPage>
