@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-
-namespace Tic_Tac_Toe.ViewModels;
+﻿namespace Tic_Tac_Toe.ViewModels;
 
 public partial class BaseViewModel : ObservableObject
 {

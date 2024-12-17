@@ -1,0 +1,12 @@
+﻿global using Tic_Tac_Toe.Interfaces;
+global using Tic_Tac_Toe.Models;
+global using Tic_Tac_Toe.ViewModels;
+global using Tic_Tac_Toe.Views;
+global using Tic_Tac_Toe.Services;
+global using System.Collections.ObjectModel;
+global using System.ComponentModel;
+global using System.Diagnostics;
+global using System.Runtime.CompilerServices;
+global using System.Text.Json;
+global using CommunityToolkit.Mvvm.ComponentModel;
+global using CommunityToolkit.Mvvm.Input;

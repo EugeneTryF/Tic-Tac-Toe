@@ -12,19 +12,4 @@
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
-    <ShellContent
-        Title=" "
-        ContentTemplate="{DataTemplate local:GameModePage}"
-        Route="GameModePage" />
-
-    <ShellContent
-        Title=" "
-        ContentTemplate="{DataTemplate local:TurnPage}"
-        Route="TurnPage" />
-
-    <ShellContent
-        Title=" "
-        ContentTemplate="{DataTemplate local:GamePage}"
-        Route="GamePage" />
-
 </Shell>

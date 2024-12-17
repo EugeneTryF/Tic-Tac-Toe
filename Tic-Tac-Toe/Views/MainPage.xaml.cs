@@ -2,13 +2,9 @@
 
 public partial class MainPage : ContentPage
 {
-    public MainPage()
+    public MainPage(LoginViewModel loginViewModel)
     {
         InitializeComponent();
-    }
-
-    private async void Button_Clicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("//GameModePage");
+        BindingContext = loginViewModel;
     }
 }

@@ -2,13 +2,9 @@ namespace Tic_Tac_Toe.Views;
 
 public partial class TurnPage : ContentPage
 {
-	public TurnPage()
-	{
-		InitializeComponent();
-	}
-
-    private async void Button_Clicked(object sender, EventArgs e)
+    public TurnPage(TurnViewModel turnViewModel)
     {
-        await Shell.Current.GoToAsync("//GamePage");
+        InitializeComponent();
+        BindingContext = turnViewModel;
     }
 }

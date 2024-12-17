@@ -1,6 +1,4 @@
-﻿using Tic_Tac_Toe.Views;
-
-namespace Tic_Tac_Toe;
+﻿namespace Tic_Tac_Toe;
 
 public partial class AppShell : Shell
 {
