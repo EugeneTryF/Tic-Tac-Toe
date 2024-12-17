@@ -7,6 +7,8 @@ public partial class GameModeViewModel : BaseViewModel
     INavigationService _navigationService;
     public ICommand ChooseGameModeCommand { get; private set; }
 
+    public string GetUserName => Preferences.Default.Get("tic-tac-toe-user", "User");
+
     public GameModeViewModel(INavigationService navigationService)
     {
         _navigationService = navigationService;
@@ -14,6 +16,11 @@ public partial class GameModeViewModel : BaseViewModel
     }
 
     async Task ChooseGameMode()
+    {
+        await RedirectToNextPage();
+    }
+
+    async Task RedirectToNextPage()
     {
         await _navigationService.NavigateToAsync(nameof(TurnPage));
     }

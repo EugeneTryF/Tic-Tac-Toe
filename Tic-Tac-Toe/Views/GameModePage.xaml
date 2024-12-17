@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:Tic_Tac_Toe.ViewModels"
              x:DataType="viewmodel:GameModeViewModel"
-             x:Class="Tic_Tac_Toe.Views.GameModePage">
+             x:Class="Tic_Tac_Toe.Views.GameModePage"
+             Title="{Binding GetUserName}">
 
     <VerticalStackLayout Spacing="15">
         <Label HorizontalOptions="CenterAndExpand" 

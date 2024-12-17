@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:Tic_Tac_Toe.ViewModels"
              x:DataType="viewmodel:TurnViewModel"
-             x:Class="Tic_Tac_Toe.Views.TurnPage">
+             x:Class="Tic_Tac_Toe.Views.TurnPage"
+             Title="{Binding GetUserName}">
 
     <VerticalStackLayout>
         <Label HorizontalOptions="CenterAndExpand" Margin="0,0,0,80" Text="My turn" />
