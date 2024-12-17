@@ -7,6 +7,8 @@ public partial class GameViewModel : BaseViewModel
     INavigationService _navigationService;
     public ICommand LogoutCommand { get; private set; }
 
+    public string GetUserName => Preferences.Default.Get("tic-tac-toe-user", "User");
+
     public GameViewModel(INavigationService navigationService)
     {
         _navigationService = navigationService;
@@ -14,6 +16,12 @@ public partial class GameViewModel : BaseViewModel
     }
 
     async Task Logout()
+    {
+        Preferences.Default.Remove("tic-tac-toe-user");
+        await RedirectToStartingPoint();
+    }
+
+    async Task RedirectToStartingPoint()
     {
         await _navigationService.InitializeAsync();
     }

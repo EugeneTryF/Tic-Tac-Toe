@@ -7,6 +7,8 @@ public partial class TurnViewModel : BaseViewModel
     INavigationService _navigationService;
     public ICommand ChooseTurnCommand { get; private set; }
 
+    public string GetUserName => Preferences.Default.Get("tic-tac-toe-user", "User");
+
     public TurnViewModel(INavigationService navigationService)
     {
         _navigationService = navigationService;
@@ -14,6 +16,11 @@ public partial class TurnViewModel : BaseViewModel
     }
 
     async Task ChooseTurn()
+    {
+        await RedirectToNextPage();
+    }
+
+    async Task RedirectToNextPage()
     {
         await _navigationService.NavigateToAsync(nameof(GamePage));
     }
