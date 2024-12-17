@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:Tic_Tac_Toe.ViewModels"
+             x:DataType="viewmodel:GameViewModel"
              x:Class="Tic_Tac_Toe.Views.GamePage">
-    <StackLayout>
+    
+    <VerticalStackLayout>
         <Grid ColumnDefinitions="*,*"
               ColumnSpacing="5"
               Margin="10,10,10,100">
@@ -15,8 +18,13 @@
                        Source="cross.png" 
                        Grid.Column="1"/>
             </HorizontalStackLayout>
-            
-            <Button Text="Logout" MaximumWidthRequest="100" Grid.Column="1" HorizontalOptions="End" Clicked="Button_Clicked"></Button>
+
+            <Button Text="Logout" 
+                    MaximumWidthRequest="100" 
+                    Grid.Column="1" 
+                    HorizontalOptions="End"
+                    Command="{Binding LogoutCommand}">
+            </Button>
             
         </Grid>
         <Grid ColumnDefinitions="100,100,100"
@@ -37,5 +45,5 @@
             <BoxView Grid.Row="2" Grid.Column="1" Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
             <BoxView Grid.Row="2" Grid.Column="2" Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
         </Grid>
-    </StackLayout>
+    </VerticalStackLayout>
 </ContentPage>

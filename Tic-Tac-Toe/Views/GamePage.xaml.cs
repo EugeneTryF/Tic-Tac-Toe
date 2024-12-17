@@ -2,13 +2,9 @@ namespace Tic_Tac_Toe.Views;
 
 public partial class GamePage : ContentPage
 {
-	public GamePage()
-	{
-		InitializeComponent();
-	}
-
-    private async void Button_Clicked(object sender, EventArgs e)
+    public GamePage(GameViewModel gameViewModel)
     {
-        await Shell.Current.GoToAsync("//MainPage");
+        InitializeComponent();
+        BindingContext = gameViewModel;
     }
 }
