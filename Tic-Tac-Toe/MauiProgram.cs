@@ -16,7 +16,7 @@ public static class MauiProgram
             });
 
         builder.Services.AddSingleton<INavigationService, NavigationService>();
-        builder.Services.AddTransient<GameService>();
+        builder.Services.AddSingleton<GameService>();
 
         builder.Services.AddTransient<LoginViewModel>();
         builder.Services.AddTransient<GameModeViewModel>();

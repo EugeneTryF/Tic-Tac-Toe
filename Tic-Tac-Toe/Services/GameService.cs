@@ -2,6 +2,7 @@
 
 namespace Tic_Tac_Toe.Services;
 
+//TODO: Need to transfer game logic to a separate service (in progress)
 public class GameService
 {
     bool _playerTwoIsComputer;
