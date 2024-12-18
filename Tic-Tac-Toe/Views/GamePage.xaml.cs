@@ -7,4 +7,15 @@ public partial class GamePage : ContentPage
         InitializeComponent();
         BindingContext = gameViewModel;
     }
+
+    private void OnGameModeChanged(object sender, EventArgs e)
+    {
+        var picker = (Picker)sender;
+        var selectedMode = (string)picker.SelectedItem;
+
+        if (BindingContext is GameViewModel viewModel)
+        {
+            viewModel.SelectedGameMode = selectedMode;
+        }
+    }
 }

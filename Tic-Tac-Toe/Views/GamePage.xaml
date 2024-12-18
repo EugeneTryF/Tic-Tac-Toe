@@ -7,6 +7,10 @@
              Title="{Binding GetUserName}">
     
     <VerticalStackLayout>
+        <Picker Title="Select Game Mode" 
+            SelectedIndexChanged="OnGameModeChanged"
+            ItemsSource="{Binding GameModes}" 
+            SelectedItem="{Binding SelectedGameMode}" />
         <Grid ColumnDefinitions="*,*"
               ColumnSpacing="5"
               Margin="10,10,10,100">
@@ -16,7 +20,7 @@
             <HorizontalStackLayout>
                 <Label Text="Turn" FontSize="Large" VerticalTextAlignment="Center" Grid.Column="0"></Label>
                 <Image Aspect="AspectFill" 
-                       Source="cross.png" 
+                       Source="{Binding CurrentTurn}" 
                        Grid.Column="1"/>
             </HorizontalStackLayout>
 
@@ -34,17 +38,62 @@
               RowSpacing="5"
               HorizontalOptions="Center"
               BackgroundColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}">
-            <BoxView Grid.Row="0" Grid.Column="0" Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
-            <BoxView Grid.Row="0" Grid.Column="1" Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
-            <BoxView Grid.Row="0" Grid.Column="2" Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
+            <ImageButton Grid.Row="0" 
+                         Grid.Column="0"
+                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                         Source="{Binding Cell00}"
+                         Command="{Binding CellClickCommand}"
+                         CommandParameter="00" />
+            <ImageButton Grid.Row="0" 
+                         Grid.Column="1"
+                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                         Source="{Binding Cell01}"
+                         Command="{Binding CellClickCommand}"
+                         CommandParameter="01" />
+            <ImageButton Grid.Row="0" 
+                         Grid.Column="2"
+                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                         Source="{Binding Cell02}"
+                         Command="{Binding CellClickCommand}"
+                         CommandParameter="02" />
 
-            <BoxView Grid.Row="1" Grid.Column="0" Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
-            <BoxView Grid.Row="1" Grid.Column="1" Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
-            <BoxView Grid.Row="1" Grid.Column="2" Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
+            <ImageButton Grid.Row="1" 
+                         Grid.Column="0"
+                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                         Source="{Binding Cell10}"
+                         Command="{Binding CellClickCommand}"
+                         CommandParameter="10" />
+            <ImageButton Grid.Row="1" 
+                         Grid.Column="1"
+                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                         Source="{Binding Cell11}"
+                         Command="{Binding CellClickCommand}"
+                         CommandParameter="11" />
+            <ImageButton Grid.Row="1" 
+                         Grid.Column="2"
+                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                         Source="{Binding Cell12}"
+                         Command="{Binding CellClickCommand}"
+                         CommandParameter="12" />
 
-            <BoxView Grid.Row="2" Grid.Column="0" Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
-            <BoxView Grid.Row="2" Grid.Column="1" Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
-            <BoxView Grid.Row="2" Grid.Column="2" Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
+            <ImageButton Grid.Row="2" 
+                         Grid.Column="0"
+                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                         Source="{Binding Cell20}"
+                         Command="{Binding CellClickCommand}"
+                         CommandParameter="20" />
+            <ImageButton Grid.Row="2" 
+                         Grid.Column="1"
+                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                         Source="{Binding Cell21}"
+                         Command="{Binding CellClickCommand}"
+                         CommandParameter="21" />
+            <ImageButton Grid.Row="2" 
+                         Grid.Column="2"
+                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                         Source="{Binding Cell22}"
+                         Command="{Binding CellClickCommand}"
+                         CommandParameter="22" />
         </Grid>
     </VerticalStackLayout>
 </ContentPage>
