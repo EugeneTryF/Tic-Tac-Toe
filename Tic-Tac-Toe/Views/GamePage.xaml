@@ -33,7 +33,10 @@
             
         </Grid>
         <CollectionView ItemsSource="{Binding Board}"
-                        WidthRequest="300"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="{OnPlatform Android=310, iOS=310, WinUI=330, MacCatalyst=330}"
+                        WidthRequest="{OnPlatform Android=310, iOS=310, WinUI=330, MacCatalyst=330}"
                         BackgroundColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" 
@@ -51,68 +54,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <!--<Grid ColumnDefinitions="100,100,100"
-              ColumnSpacing="5"
-              RowDefinitions="100,100,100"
-              RowSpacing="5"
-              HorizontalOptions="Center"
-              BackgroundColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}">
-            <ImageButton Grid.Row="0" 
-                         Grid.Column="0"
-                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
-                         Source="{Binding Cell00}"
-                         Command="{Binding CellClickCommand}"
-                         CommandParameter="00" />
-            <ImageButton Grid.Row="0" 
-                         Grid.Column="1"
-                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
-                         Source="{Binding Cell01}"
-                         Command="{Binding CellClickCommand}"
-                         CommandParameter="01" />
-            <ImageButton Grid.Row="0" 
-                         Grid.Column="2"
-                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
-                         Source="{Binding Cell02}"
-                         Command="{Binding CellClickCommand}"
-                         CommandParameter="02" />
-
-            <ImageButton Grid.Row="1" 
-                         Grid.Column="0"
-                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
-                         Source="{Binding Cell10}"
-                         Command="{Binding CellClickCommand}"
-                         CommandParameter="10" />
-            <ImageButton Grid.Row="1" 
-                         Grid.Column="1"
-                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
-                         Source="{Binding Cell11}"
-                         Command="{Binding CellClickCommand}"
-                         CommandParameter="11" />
-            <ImageButton Grid.Row="1" 
-                         Grid.Column="2"
-                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
-                         Source="{Binding Cell12}"
-                         Command="{Binding CellClickCommand}"
-                         CommandParameter="12" />
-
-            <ImageButton Grid.Row="2" 
-                         Grid.Column="0"
-                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
-                         Source="{Binding Cell20}"
-                         Command="{Binding CellClickCommand}"
-                         CommandParameter="20" />
-            <ImageButton Grid.Row="2" 
-                         Grid.Column="1"
-                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
-                         Source="{Binding Cell21}"
-                         Command="{Binding CellClickCommand}"
-                         CommandParameter="21" />
-            <ImageButton Grid.Row="2" 
-                         Grid.Column="2"
-                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
-                         Source="{Binding Cell22}"
-                         Command="{Binding CellClickCommand}"
-                         CommandParameter="22" />
-        </Grid>-->
     </VerticalStackLayout>
 </ContentPage>
