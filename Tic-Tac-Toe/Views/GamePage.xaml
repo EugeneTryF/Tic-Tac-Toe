@@ -32,7 +32,26 @@
             </Button>
             
         </Grid>
-        <Grid ColumnDefinitions="100,100,100"
+        <CollectionView ItemsSource="{Binding Board}"
+                        WidthRequest="300"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" 
+                                 Span="3"
+                                 VerticalItemSpacing="5"
+                                 HorizontalItemSpacing="5" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewmodel:CellViewModel">
+                    <ImageButton WidthRequest="100" HeightRequest="100"
+                                 BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                                 Source="{Binding CellValue}" 
+                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=CellClickCommand}"
+                                 CommandParameter="{Binding .}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <!--<Grid ColumnDefinitions="100,100,100"
               ColumnSpacing="5"
               RowDefinitions="100,100,100"
               RowSpacing="5"
@@ -94,6 +113,6 @@
                          Source="{Binding Cell22}"
                          Command="{Binding CellClickCommand}"
                          CommandParameter="22" />
-        </Grid>
+        </Grid>-->
     </VerticalStackLayout>
 </ContentPage>
