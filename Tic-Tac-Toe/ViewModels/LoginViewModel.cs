@@ -17,10 +17,6 @@ public partial class LoginViewModel : BaseViewModel
     {
         _navigationService = navigationService;
         RegisterCommand = new Command(async () => await RegisterUser());
-
-        bool hasKey = Preferences.Default.ContainsKey("tic-tac-toe-user");
-        if (hasKey)
-            _navigationService.NavigateToAsync(nameof(GameModePage));
     }
 
     async Task RegisterUser()
