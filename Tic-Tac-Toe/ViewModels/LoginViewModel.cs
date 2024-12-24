@@ -9,7 +9,7 @@ public partial class LoginViewModel : BaseViewModel
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(UserNameIsNotEmpty))]
-    string userName = "";
+    string userName = string.Empty;
 
     public bool UserNameIsNotEmpty => UserName.Length > 0;
 
@@ -17,16 +17,12 @@ public partial class LoginViewModel : BaseViewModel
     {
         _navigationService = navigationService;
         RegisterCommand = new Command(async () => await RegisterUser());
-
-        bool hasKey = Preferences.Default.ContainsKey("tic-tac-toe-user");
-        if (hasKey)
-            _navigationService.NavigateToAsync(nameof(GameModePage));
     }
 
     async Task RegisterUser()
     {
         Preferences.Default.Set("tic-tac-toe-user", UserName);
-        UserName = "";
+        UserName = string.Empty;
         await RedirectToNextPage();
     }
 

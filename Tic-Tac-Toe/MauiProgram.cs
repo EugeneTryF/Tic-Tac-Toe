@@ -16,13 +16,12 @@ public static class MauiProgram
             });
 
         builder.Services.AddSingleton<INavigationService, NavigationService>();
+        builder.Services.AddSingleton<AppShell>();
 
         builder.Services.AddTransient<LoginViewModel>();
         builder.Services.AddTransient<GameModeViewModel>();
         builder.Services.AddTransient<TurnViewModel>();
         builder.Services.AddTransient<GameViewModel>();
-
-        
 
 #if DEBUG
         builder.Logging.AddDebug();
