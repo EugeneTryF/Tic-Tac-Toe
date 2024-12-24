@@ -4,7 +4,16 @@ public class NavigationService : INavigationService
 {
     public async Task InitializeAsync()
     {
-        await NavigateToAsync("//MainPage");
+        var nickname = Preferences.Get("tic-tac-toe-user", string.Empty);
+
+        if (string.IsNullOrEmpty(nickname))
+        {
+            await NavigateToAsync("//MainPage");
+        }
+        else
+        {
+            await NavigateToAsync("//GameModePage");
+        }
     }
 
     public async Task NavigateToAsync(string route, IDictionary<string, object> routeParameters = null)

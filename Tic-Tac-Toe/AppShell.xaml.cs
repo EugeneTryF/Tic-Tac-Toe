@@ -2,9 +2,12 @@
 
 public partial class AppShell : Shell
 {
-    public AppShell()
+    INavigationService _navigationService;
+
+    public AppShell(INavigationService navigationService)
     {
         InitializeComponent();
+        _navigationService = navigationService;
 
         Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
         Routing.RegisterRoute(nameof(GameModePage), typeof(GameModePage));
@@ -16,20 +19,6 @@ public partial class AppShell : Shell
 
     private async void AppShell_Loaded(object sender, EventArgs e)
     {
-        await NavigateBasedOnPreferences();
-    }
-
-    private async Task NavigateBasedOnPreferences()
-    {
-        var nickname = Preferences.Get("tic-tac-toe-user", string.Empty);
-
-        if (string.IsNullOrEmpty(nickname))
-        {
-            await Shell.Current.GoToAsync("//MainPage");
-        }
-        else
-        {
-            await Shell.Current.GoToAsync("//GameModePage");
-        }
+        await _navigationService.InitializeAsync();
     }
 }

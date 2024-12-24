@@ -9,7 +9,7 @@ public partial class LoginViewModel : BaseViewModel
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(UserNameIsNotEmpty))]
-    string userName = "";
+    string userName = string.Empty;
 
     public bool UserNameIsNotEmpty => UserName.Length > 0;
 
@@ -22,7 +22,7 @@ public partial class LoginViewModel : BaseViewModel
     async Task RegisterUser()
     {
         Preferences.Default.Set("tic-tac-toe-user", UserName);
-        UserName = "";
+        UserName = string.Empty;
         await RedirectToNextPage();
     }
 
