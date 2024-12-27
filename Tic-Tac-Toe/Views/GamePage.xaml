@@ -5,12 +5,8 @@
              x:DataType="viewmodel:GameViewModel"
              x:Class="Tic_Tac_Toe.Views.GamePage"
              Title="{Binding GetUserName}">
-    
+
     <VerticalStackLayout>
-        <Picker Title="Select Game Mode" 
-            SelectedIndexChanged="OnGameModeChanged"
-            ItemsSource="{Binding GameModes}" 
-            SelectedItem="{Binding SelectedGameMode}" />
         <Grid ColumnDefinitions="*,*"
               ColumnSpacing="5"
               Margin="10,10,10,100">

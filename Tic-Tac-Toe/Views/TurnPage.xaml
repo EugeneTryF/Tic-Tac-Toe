@@ -15,14 +15,14 @@
                          Source="cross.png"
                          WidthRequest="125"
                          HeightRequest="125"
-                         Command="{Binding ChooseTurnCommand}">
+                         Command="{Binding ChooseTurnXCommand}">
             </ImageButton>
 
             <ImageButton Grid.Column="1"
                          Source="circle.png"
                          WidthRequest="125"
                          HeightRequest="125"
-                         Command="{Binding ChooseTurnCommand}">
+                         Command="{Binding ChooseTurnOCommand}">
             </ImageButton>
 
         </Grid>
