@@ -2,9 +2,13 @@
 
 namespace Tic_Tac_Toe.ViewModels;
 
+[QueryProperty(nameof(GameSettings), "GameSettings")]
 public partial class GameViewModel : BaseViewModel
 {
     INavigationService _navigationService;
+
+    [ObservableProperty]
+    GameSettings gameSettings;
 
     bool _isCross = true;
     string _circle = "circle.png";
@@ -17,9 +21,22 @@ public partial class GameViewModel : BaseViewModel
     string selectedGameMode;
 
     [ObservableProperty]
+    string selectedPlayerChoice = "Player 1 (X)";
+
+    [ObservableProperty]
+    string player1Symbol;
+
+    [ObservableProperty]
+    string player2Symbol;
+
+    [ObservableProperty]
+    string computerSymbol;
+
+    [ObservableProperty]
     ObservableCollection<CellViewModel> board = new();
 
     public List<string> GameModes { get; } = new List<string> { "Two Players", "Vs Computer" };
+    public List<string> PlayerChoices { get; } = new List<string> { "Player 1 (X)", "Player 2 (O)" };
 
     public ICommand CellClickCommand { get; private set; }
     public ICommand LogoutCommand { get; private set; }
@@ -46,9 +63,28 @@ public partial class GameViewModel : BaseViewModel
                 Board.Add(new CellViewModel(i, j));
             }
         }
+        
+        if (SelectedPlayerChoice == "Player 1 (X)")
+        {
+            Player1Symbol = _cross;
+            Player2Symbol = _circle;
+            ComputerSymbol = _circle;
+            _isCross = true;
+            CurrentTurn = _cross;
+        }
+        else
+        {
+            Player1Symbol = _circle;
+            Player2Symbol = _cross;
+            ComputerSymbol = _cross;
+            _isCross = true;
+            CurrentTurn = _cross;
 
-        _isCross = true;
-        CurrentTurn = _cross;
+            if (SelectedGameMode == "Vs Computer")
+            {
+                ComputerMove();
+            }
+        }
     }
 
     async Task CellClick(CellViewModel cell)
@@ -76,7 +112,7 @@ public partial class GameViewModel : BaseViewModel
         if (emptyCells.Count > 0)
         {
             var randomCell = emptyCells[new Random().Next(emptyCells.Count)];
-            randomCell.CellValue = _circle;
+            randomCell.CellValue = ComputerSymbol;
 
             if (await CheckGameOver())
                 return;
@@ -129,7 +165,7 @@ public partial class GameViewModel : BaseViewModel
         var winner = CheckWinner();
         if (winner != null)
         {
-            await ShowWinner(winner == _cross ? "Player 1" : SelectedGameMode == "Two Players" ? "Player 2" : "Computer");
+            await ShowWinner(winner == Player1Symbol ? "Player 1" : SelectedGameMode == "Two Players" ? "Player 2" : "Computer");
             return true;
         }
 

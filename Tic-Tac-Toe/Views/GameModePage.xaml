@@ -13,11 +13,11 @@
         <Button HorizontalOptions="Center" 
                 WidthRequest="300" 
                 Text="P1 VS P2" 
-                Command="{Binding ChooseGameModeCommand}"></Button>
+                Command="{Binding ChoosePvPGameModeCommand}"></Button>
         <Button HorizontalOptions="Center" 
                 WidthRequest="300" 
                 Text="P1 VS COM" 
-                Command="{Binding ChooseGameModeCommand}"></Button>
+                Command="{Binding ChoosePvEGameModeCommand}"></Button>
     </VerticalStackLayout>
 
 </ContentPage>

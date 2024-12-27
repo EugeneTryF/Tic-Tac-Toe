@@ -7,6 +7,10 @@
              Title="{Binding GetUserName}">
     
     <VerticalStackLayout>
+        <Picker
+            ItemsSource="{Binding PlayerChoices}"
+            SelectedItem="{Binding SelectedPlayerChoice}"
+            Title="Select Starting Player" />
         <Picker Title="Select Game Mode" 
             SelectedIndexChanged="OnGameModeChanged"
             ItemsSource="{Binding GameModes}" 

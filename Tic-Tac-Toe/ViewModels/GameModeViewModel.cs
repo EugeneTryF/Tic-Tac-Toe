@@ -5,23 +5,33 @@ namespace Tic_Tac_Toe.ViewModels;
 public partial class GameModeViewModel : BaseViewModel
 {
     INavigationService _navigationService;
-    public ICommand ChooseGameModeCommand { get; private set; }
+    public ICommand ChoosePvEGameModeCommand { get; private set; }
+    public ICommand ChoosePvPGameModeCommand { get; private set; }
 
     public string GetUserName => Preferences.Default.Get("tic-tac-toe-user", "User");
 
     public GameModeViewModel(INavigationService navigationService)
     {
         _navigationService = navigationService;
-        ChooseGameModeCommand = new Command(async () => await ChooseGameMode());
+        ChoosePvEGameModeCommand = new Command(async () => await ChoosePvEGameMode());
+        ChoosePvPGameModeCommand = new Command(async () => await ChoosePvPGameMode());
     }
 
-    async Task ChooseGameMode()
+    async Task ChoosePvEGameMode()
     {
-        await RedirectToNextPage();
+        await RedirectToNextPage(new GameSettings { GameMode = "Vs Computer" });
     }
 
-    async Task RedirectToNextPage()
+    async Task ChoosePvPGameMode()
     {
-        await _navigationService.NavigateToAsync(nameof(TurnPage));
+        await RedirectToNextPage(new GameSettings { GameMode = "Two Players" });
+    }
+
+    async Task RedirectToNextPage(GameSettings gameSettings)
+    {
+        await _navigationService.NavigateToAsync(nameof(TurnPage), new Dictionary<string, object>
+        {
+            { "GameSettings", gameSettings }
+        });
     }
 }
