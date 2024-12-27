@@ -14,29 +14,15 @@ public partial class GameViewModel : BaseViewModel
     string _circle = "circle.png";
     string _cross = "cross.png";
 
+    string player1Symbol;
+    string player2Symbol;
+    string computerSymbol;
+
     [ObservableProperty]
     string currentTurn = "cross.png";
 
     [ObservableProperty]
-    string selectedGameMode;
-
-    [ObservableProperty]
-    string selectedPlayerChoice = "Player 1 (X)";
-
-    [ObservableProperty]
-    string player1Symbol;
-
-    [ObservableProperty]
-    string player2Symbol;
-
-    [ObservableProperty]
-    string computerSymbol;
-
-    [ObservableProperty]
     ObservableCollection<CellViewModel> board = new();
-
-    public List<string> GameModes { get; } = new List<string> { "Two Players", "Vs Computer" };
-    public List<string> PlayerChoices { get; } = new List<string> { "Player 1 (X)", "Player 2 (O)" };
 
     public ICommand CellClickCommand { get; private set; }
     public ICommand LogoutCommand { get; private set; }
@@ -48,9 +34,6 @@ public partial class GameViewModel : BaseViewModel
         _navigationService = navigationService;
         CellClickCommand = new Command(async (cell) => await CellClick((CellViewModel)cell));
         LogoutCommand = new Command(async () => await Logout());
-        SelectedGameMode = GameModes[0];
-
-        InitializeBoard();
     }
 
     void InitializeBoard()
@@ -64,26 +47,34 @@ public partial class GameViewModel : BaseViewModel
             }
         }
         
-        if (SelectedPlayerChoice == "Player 1 (X)")
+        if (GameSettings.Turn == "X")
         {
-            Player1Symbol = _cross;
-            Player2Symbol = _circle;
-            ComputerSymbol = _circle;
+            player1Symbol = _cross;
+            player2Symbol = _circle;
+            computerSymbol = _circle;
             _isCross = true;
             CurrentTurn = _cross;
         }
         else
         {
-            Player1Symbol = _circle;
-            Player2Symbol = _cross;
-            ComputerSymbol = _cross;
+            player1Symbol = _circle;
+            player2Symbol = _cross;
+            computerSymbol = _cross;
             _isCross = true;
             CurrentTurn = _cross;
 
-            if (SelectedGameMode == "Vs Computer")
+            if (GameSettings.GameMode == "Vs Computer")
             {
                 ComputerMove();
             }
+        }
+    }
+
+    partial void OnGameSettingsChanged(GameSettings value)
+    {
+        if (value != null)
+        {
+            InitializeBoard();
         }
     }
 
@@ -100,7 +91,7 @@ public partial class GameViewModel : BaseViewModel
         _isCross = !_isCross;
         CurrentTurn = _isCross ? _cross : _circle;
 
-        if (SelectedGameMode == "Vs Computer" && !_isCross)
+        if (GameSettings.GameMode == "Vs Computer")
         {
             await ComputerMove();
         }
@@ -108,17 +99,18 @@ public partial class GameViewModel : BaseViewModel
 
     async Task ComputerMove()
     {
+        await Task.Delay(500);
         var emptyCells = Board.Where(c => string.IsNullOrEmpty(c.CellValue)).ToList();
         if (emptyCells.Count > 0)
         {
             var randomCell = emptyCells[new Random().Next(emptyCells.Count)];
-            randomCell.CellValue = ComputerSymbol;
+            randomCell.CellValue = computerSymbol;
 
             if (await CheckGameOver())
                 return;
 
-            _isCross = true;
-            CurrentTurn = _cross;
+            _isCross = !_isCross;
+            CurrentTurn = _isCross ? _cross : _circle;
         }
     }
 
@@ -165,7 +157,7 @@ public partial class GameViewModel : BaseViewModel
         var winner = CheckWinner();
         if (winner != null)
         {
-            await ShowWinner(winner == Player1Symbol ? "Player 1" : SelectedGameMode == "Two Players" ? "Player 2" : "Computer");
+            await ShowWinner(winner == player1Symbol ? GetUserName : GameSettings.GameMode == "Two Players" ? "Player 2" : "Computer");
             return true;
         }
 
