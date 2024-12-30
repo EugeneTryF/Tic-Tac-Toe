@@ -23,48 +23,25 @@ public partial class BorderedEntryHandler : EntryHandler
     {
         if (entry is BorderedEntry border && handler.PlatformView is TextBox textBox)
         {
-            //textBox.BorderBrush = new Microsoft.UI.Xaml.Media.SolidColorBrush(border.BorderColor.ToWindowsColor());
-
-            //textBox.BorderThickness = new Microsoft.UI.Xaml.Thickness(
-            //    border.BorderThickness);
-
-            //textBox.CornerRadius = new Microsoft.UI.Xaml.CornerRadius(border.CornerRadius);
-
-
             textBox.BorderBrush = new Microsoft.UI.Xaml.Media.SolidColorBrush(border.BorderColor.ToWindowsColor());
             
-            textBox.BorderThickness = new Microsoft.UI.Xaml.Thickness(
-                border.BorderThickness);
+            textBox.BorderThickness = new Microsoft.UI.Xaml.Thickness(border.BorderThickness);
 
             textBox.CornerRadius = new Microsoft.UI.Xaml.CornerRadius(border.CornerRadius);
             
-            textBox.Resources["TextControlBackgroundFocused"] = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Transparent);
-            
-            
-            //var parentPanel = textBox.Parent as Panel;
-            //if (parentPanel == null) return;
+            //Remove underline
+            //textBox.Resources["TextControlBorderBrushFocused"] = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Transparent);
+            //textBox.Resources["TextControlBackgroundFocused"] = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Transparent);
 
-            //parentPanel.Children.Remove(textBox);
-
-            //var canvas = new Canvas();
-            //parentPanel.Children.Add(canvas);
-
-            //var rectangle = new Rectangle
+            //textBox.GotFocus += (sender, args) =>
             //{
-            //    Stroke = new Microsoft.UI.Xaml.Media.SolidColorBrush(border.BorderColor.ToWindowsColor()),
-            //    StrokeThickness = border.BorderThickness,
-            //    RadiusX = border.CornerRadius,
-            //    RadiusY = border.CornerRadius,
-            //    Width = textBox.Width - (2 * border.BorderThickness),
-            //    Height = textBox.Height - (2 * border.BorderThickness),
-            //};
-            //Canvas.SetLeft(rectangle, 0);
-            //Canvas.SetTop(rectangle, 0);
-            //canvas.Children.Add(rectangle);
+            //    textBox.BorderThickness = new Microsoft.UI.Xaml.Thickness(border.BorderThickness);
+            //    textBox.BorderBrush = new Microsoft.UI.Xaml.Media.SolidColorBrush(border.BorderColor.ToWindowsColor());
+            //    textBox.CornerRadius = new Microsoft.UI.Xaml.CornerRadius(border.CornerRadius);
 
-            //Canvas.SetLeft(textBox, border.BorderThickness);
-            //Canvas.SetTop(textBox, border.BorderThickness);
-            //canvas.Children.Add(textBox);
+            //    textBox.Resources["TextControlBorderBrushFocused"] = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Transparent);
+            //    textBox.Resources["TextControlBackgroundFocused"] = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Transparent);
+            //};
         }
     }
 }
