@@ -13,11 +13,9 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <HorizontalStackLayout>
-                <Label Text="Turn" FontSize="Large" VerticalTextAlignment="Center" Grid.Column="0"></Label>
-                <Image Aspect="AspectFill" 
-                       Source="{Binding CurrentTurn}" 
-                       Grid.Column="1"/>
+            <HorizontalStackLayout Grid.Column="0">
+                <Label Text="Turn" FontSize="Large" VerticalTextAlignment="Center"></Label>
+                <Image HorizontalOptions="FillAndExpand" Source="{Binding CurrentTurn}"/>
             </HorizontalStackLayout>
 
             <Button Text="Logout" 

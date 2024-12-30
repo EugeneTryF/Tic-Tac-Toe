@@ -60,6 +60,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Enums\**" />
+	  <Compile Remove="Enums\**" />
+	  <EmbeddedResource Remove="Enums\**" />
+	  <MauiCss Remove="Enums\**" />
+	  <MauiXaml Remove="Enums\**" />
+	  <None Remove="Enums\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
@@ -78,7 +87,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Enums\" />
+	  <Folder Include="Elements\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Platforms\Windows\Handlers\BorderedEntryHandler.cs">
+	    <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

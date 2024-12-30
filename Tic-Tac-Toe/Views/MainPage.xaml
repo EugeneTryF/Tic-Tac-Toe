@@ -2,15 +2,21 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel ="clr-namespace:Tic_Tac_Toe.ViewModels"
+             xmlns:elements="clr-namespace:Tic_Tac_Toe.Elements"
              x:DataType="viewmodel:LoginViewModel"
              x:Class="Tic_Tac_Toe.Views.MainPage">
 
     <VerticalStackLayout>
         <Label HorizontalOptions="CenterAndExpand" Margin="0,0,0,80" Text="Tic Tac Toe" />
         <Label HorizontalOptions="CenterAndExpand" Margin="0,0,0,15"  Text="My name" />
-        <Border Margin="0,0,0,80" HorizontalOptions="Center" WidthRequest="300">
-            <Entry Text="{Binding UserName}" />
-        </Border>
+        <elements:BorderedEntry WidthRequest="300"
+                                BorderColor="Purple"
+                                Margin="0,0,0,15" 
+                                Text="{Binding UserName}" >
+            <elements:BorderedEntry.BorderThickness>
+                <OnPlatform x:TypeArguments="x:Double" Default="5"/>
+            </elements:BorderedEntry.BorderThickness>
+        </elements:BorderedEntry>
         <Button HorizontalOptions="Center" WidthRequest="300" Text="Next" IsEnabled="{Binding UserNameIsNotEmpty}" Command="{Binding RegisterCommand}"></Button>
     </VerticalStackLayout>
 
