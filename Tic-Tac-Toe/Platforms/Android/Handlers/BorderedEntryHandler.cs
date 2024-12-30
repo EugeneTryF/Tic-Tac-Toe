@@ -1,13 +1,7 @@
-﻿using Microsoft.Maui.Controls.Platform;
-using Microsoft.Maui.Graphics;
+﻿using Android.Graphics.Drawables;
 using Microsoft.Maui.Handlers;
-using Tic_Tac_Toe.Elements;
-using Microsoft.Maui;
 using Microsoft.Maui.Platform;
-
-#if ANDROID
-using Android.Graphics.Drawables;
-#endif
+using Tic_Tac_Toe.Elements;
 
 namespace Tic_Tac_Toe.Handlers;
 
@@ -16,17 +10,14 @@ public partial class BorderedEntryHandler : EntryHandler
 
     public BorderedEntryHandler() : base()
     {
-#if ANDROID
         Mapper.AppendToMapping(nameof(BorderedEntry.BorderColor), MapBorderProperties);
         Mapper.AppendToMapping(nameof(BorderedEntry.BorderThickness), MapBorderProperties);
         Mapper.AppendToMapping(nameof(BorderedEntry.CornerRadius), MapBorderProperties);
-#endif
     }
 
-#if ANDROID
     private void MapBorderProperties(IEntryHandler handler, IEntry entry)
     {
-        
+
         BorderedEntry border = entry as BorderedEntry;
 
         if (handler.PlatformView is not null)
@@ -42,6 +33,4 @@ public partial class BorderedEntryHandler : EntryHandler
             handler.PlatformView.SetPadding(padding, padding, padding, padding);
         }
     }
-#endif
-
 }

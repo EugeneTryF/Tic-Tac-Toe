@@ -88,8 +88,12 @@
 
 	<ItemGroup>
 	  <Folder Include="Elements\" />
-	  <Folder Include="Handlers\" />
-	  <Folder Include="Platforms\Android\Handlers\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Platforms\Windows\Handlers\BorderedEntryHandler.cs">
+	    <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
+	  </Compile>
 	</ItemGroup>
 
 </Project>
