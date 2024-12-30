@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using Tic_Tac_Toe.Elements;
+using Tic_Tac_Toe.Handlers;
 
 namespace Tic_Tac_Toe;
 
@@ -13,6 +15,10 @@ public static class MauiProgram
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            })
+            .ConfigureMauiHandlers(handlers =>
+            {
+                handlers.AddHandler<BorderedEntry, BorderedEntryHandler>();
             });
 
         builder.Services.AddSingleton<INavigationService, NavigationService>();

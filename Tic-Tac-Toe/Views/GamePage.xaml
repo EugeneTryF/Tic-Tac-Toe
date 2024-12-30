@@ -15,7 +15,7 @@
             </Grid.RowDefinitions>
             <HorizontalStackLayout>
                 <Label Text="Turn" FontSize="Large" VerticalTextAlignment="Center" Grid.Column="0"></Label>
-                <Image Aspect="AspectFill" 
+                <Image Aspect="Fill" 
                        Source="{Binding CurrentTurn}" 
                        Grid.Column="1"/>
             </HorizontalStackLayout>
