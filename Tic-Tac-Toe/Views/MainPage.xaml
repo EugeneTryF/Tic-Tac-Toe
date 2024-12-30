@@ -9,11 +9,16 @@
     <VerticalStackLayout>
         <Label HorizontalOptions="CenterAndExpand" Margin="0,0,0,80" Text="Tic Tac Toe" />
         <Label HorizontalOptions="CenterAndExpand" Margin="0,0,0,15"  Text="My name" />
-        <elements:BorderedEntry WidthRequest="300" 
-                                BorderThickness="10" 
+        <elements:BorderedEntry WidthRequest="300"
                                 BorderColor="Purple"
                                 Margin="0,0,0,15" 
-                                Text="{Binding UserName}" />
+                                Text="{Binding UserName}" >
+            <elements:BorderedEntry.BorderThickness>
+                <OnPlatform x:TypeArguments="x:Double" Default="5">
+                    <On Platform="Android,iOS" Value="10"/>
+                </OnPlatform>
+            </elements:BorderedEntry.BorderThickness>
+        </elements:BorderedEntry>
         <Button HorizontalOptions="Center" WidthRequest="300" Text="Next" IsEnabled="{Binding UserNameIsNotEmpty}" Command="{Binding RegisterCommand}"></Button>
     </VerticalStackLayout>
 

@@ -24,7 +24,7 @@ public partial class BorderedEntryHandler : EntryHandler
         {
             var gradientDrawable = new GradientDrawable();
             gradientDrawable.SetCornerRadius((float)border.CornerRadius);
-            gradientDrawable.SetStroke((int)border.BorderThickness, border.BorderColor.ToPlatform(), 1.0f, 1.0f);
+            gradientDrawable.SetStroke((int)border.BorderThickness, border.BorderColor.ToPlatform());
             gradientDrawable.SetColor(Android.Graphics.Color.Transparent);
 
             handler.PlatformView.SetBackgroundDrawable(gradientDrawable);
