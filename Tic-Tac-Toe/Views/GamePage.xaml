@@ -6,10 +6,11 @@
              x:Class="Tic_Tac_Toe.Views.GamePage"
              Title="{Binding GetUserName}">
 
-    <VerticalStackLayout>
-        <Grid ColumnDefinitions="*,*"
+    <Grid RowDefinitions="Auto,*,*" ColumnDefinitions="*,*">
+        <Grid Grid.Row="0" Grid.ColumnSpan="2"
+              ColumnDefinitions="*,*"
               ColumnSpacing="5"
-              Margin="10,10,10,100">
+              Margin="10,10,10,10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
@@ -26,7 +27,10 @@
             </Button>
             
         </Grid>
-        <CollectionView ItemsSource="{Binding Board}"
+        <CollectionView Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="{OnIdiom Phone=2, Tablet=2, Desktop=1}"
+                        ItemsSource="{Binding Board}"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
                         HeightRequest="{OnPlatform Android=310, iOS=310, WinUI=330, MacCatalyst=330}"
@@ -48,5 +52,39 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </VerticalStackLayout>
+        <Grid Grid.Row="{OnIdiom Phone=2, Tablet=2, Desktop=1}"
+                    Grid.Column="{OnIdiom Phone=0, Tablet=0, Desktop=1}"
+                    Grid.ColumnSpan="{OnIdiom Phone=2, Tablet=2, Desktop=1}"
+                    HorizontalOptions="Fill" ColumnDefinitions="*"
+                    Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Text="History"
+                   FontSize="Large"
+                   TextColor="Gray" />
+            <Border Grid.Row="1">
+                <ScrollView>
+                    <CollectionView ItemsSource="{Binding Board}"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" 
+                                             Span="1"
+                                             VerticalItemSpacing="5"
+                                             HorizontalItemSpacing="5" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <!--x:DataType="viewmodel:CellViewModel"-->
+                                <Label Text="History"/>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </Border>
+            
+        </Grid>
+    </Grid>
 </ContentPage>
