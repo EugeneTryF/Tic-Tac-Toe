@@ -66,19 +66,31 @@
                    TextColor="Gray" />
             <Border Grid.Row="1">
                 <ScrollView>
-                    <CollectionView ItemsSource="{Binding Board}"
-                                    HorizontalOptions="FillAndExpand"
-                                    VerticalOptions="FillAndExpand">
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Vertical" 
-                                             Span="1"
-                                             VerticalItemSpacing="5"
-                                             HorizontalItemSpacing="5" />
-                        </CollectionView.ItemsLayout>
+                    <CollectionView ItemsSource="{Binding History}"
+                                    SelectionMode="Single"
+                                    SelectedItem="{Binding SelectedHistoryEntry, Mode=TwoWay}"
+                                    SelectionChangedCommand="{Binding NavigateToHistoryCommand}"
+                                    SelectionChangedCommandParameter="{Binding SelectedHistoryEntry}">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <!--x:DataType="viewmodel:CellViewModel"-->
-                                <Label Text="History"/>
+                            <DataTemplate x:DataType="viewmodel:GameHistoryViewModel">
+                                <Border>
+                                    <HorizontalStackLayout Padding="5">
+                                        <Label Text="{Binding Description}" VerticalTextAlignment="Center" FontAttributes="Bold" Margin="0,0,15,0" />
+                                        <Grid ColumnDefinitions="15,15,15"
+                                              RowDefinitions="15,15,15"
+                                              Margin="1" BackgroundColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}">
+                                            <Image WidthRequest="14" HeightRequest="14" Grid.Row="0" Grid.Column="0" Source="{Binding BoardState[0]}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
+                                            <Image WidthRequest="14" HeightRequest="14" Grid.Row="0" Grid.Column="1" Source="{Binding BoardState[1]}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
+                                            <Image WidthRequest="14" HeightRequest="14" Grid.Row="0" Grid.Column="2" Source="{Binding BoardState[2]}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
+                                            <Image WidthRequest="14" HeightRequest="14" Grid.Row="1" Grid.Column="0" Source="{Binding BoardState[3]}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
+                                            <Image WidthRequest="14" HeightRequest="14" Grid.Row="1" Grid.Column="1" Source="{Binding BoardState[4]}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
+                                            <Image WidthRequest="14" HeightRequest="14" Grid.Row="1" Grid.Column="2" Source="{Binding BoardState[5]}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
+                                            <Image WidthRequest="14" HeightRequest="14" Grid.Row="2" Grid.Column="0" Source="{Binding BoardState[6]}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
+                                            <Image WidthRequest="14" HeightRequest="14" Grid.Row="2" Grid.Column="1" Source="{Binding BoardState[7]}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
+                                            <Image WidthRequest="14" HeightRequest="14" Grid.Row="2" Grid.Column="2" Source="{Binding BoardState[8]}" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
+                                        </Grid>
+                                    </HorizontalStackLayout>
+                                </Border>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
