@@ -22,10 +22,17 @@ public partial class GameViewModel : BaseViewModel
     string currentTurn = "cross.png";
 
     [ObservableProperty]
+    GameHistoryViewModel? selectedHistoryEntry;
+
+    [ObservableProperty]
     ObservableCollection<CellViewModel> board = new();
+
+    [ObservableProperty]
+    ObservableCollection<GameHistoryViewModel> history = new();
 
     public ICommand CellClickCommand { get; private set; }
     public ICommand LogoutCommand { get; private set; }
+    public ICommand NavigateToHistoryCommand { get; private set; }
 
     public string GetUserName => Preferences.Default.Get("tic-tac-toe-user", "User");
 
@@ -34,11 +41,14 @@ public partial class GameViewModel : BaseViewModel
         _navigationService = navigationService;
         CellClickCommand = new Command(async (cell) => await CellClick((CellViewModel)cell));
         LogoutCommand = new Command(async () => await Logout());
+        NavigateToHistoryCommand = new Command<GameHistoryViewModel>(async (entry) => await NavigateToHistory(entry));
     }
 
     void InitializeBoard()
     {
         Board.Clear();
+        History.Clear();
+
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
@@ -68,6 +78,8 @@ public partial class GameViewModel : BaseViewModel
                 ComputerMove();
             }
         }
+
+        AddHistoryEntry("Game Start");
     }
 
     partial void OnGameSettingsChanged(GameSettings value)
@@ -84,6 +96,8 @@ public partial class GameViewModel : BaseViewModel
             return;
 
         cell.CellValue = _isCross ? _cross : _circle;
+
+        AddHistoryEntry($"Turn {History.Count} - {(player1Symbol == CurrentTurn ? GetUserName : GameSettings.GameMode == "Two Players" ? "Player 2" : "Computer")}");
 
         if (await CheckGameOver())
             return;
@@ -106,11 +120,54 @@ public partial class GameViewModel : BaseViewModel
             var randomCell = emptyCells[new Random().Next(emptyCells.Count)];
             randomCell.CellValue = computerSymbol;
 
+            AddHistoryEntry($"Turn {History.Count} - Computer");
+
             if (await CheckGameOver())
                 return;
 
             _isCross = !_isCross;
             CurrentTurn = _isCross ? _cross : _circle;
+        }
+    }
+
+    void AddHistoryEntry(string description)
+    {
+        var boardState = Board.Select(cell => cell.CellValue).ToList();
+        History.Add(new GameHistoryViewModel
+        {
+            Description = description,
+            BoardState = boardState
+        });
+    }
+
+    async Task NavigateToHistory(GameHistoryViewModel selectedEntry)
+    {
+        if (selectedEntry == null) return;
+
+        int targetIndex = History.IndexOf(selectedEntry);
+
+        for (int i = History.Count - 1; i > targetIndex; i--)
+        {
+            History.RemoveAt(i);
+        }
+
+        string[] newBoardState = new string[9];
+
+        selectedEntry.BoardState.CopyTo(newBoardState);
+
+        SelectedHistoryEntry = null;
+
+        for (int i = 0; i < Board.Count; i++)
+        {
+            Board[i].CellValue = newBoardState[i];
+        }
+
+        _isCross = targetIndex % 2 == 0;
+        CurrentTurn = _isCross ? _cross : _circle;
+
+        if (GameSettings.GameMode == "Vs Computer" && CurrentTurn == computerSymbol)
+        {
+            await ComputerMove();
         }
     }
 
