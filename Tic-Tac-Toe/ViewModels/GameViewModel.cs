@@ -56,7 +56,9 @@ public partial class GameViewModel : BaseViewModel
                 Board.Add(new CellViewModel(i, j));
             }
         }
-        
+
+        InitializeCellBorders();
+
         if (GameSettings.Turn == "X")
         {
             player1Symbol = _cross;
@@ -80,6 +82,24 @@ public partial class GameViewModel : BaseViewModel
         }
 
         AddHistoryEntry("Game Start");
+    }
+
+    void InitializeCellBorders()
+    {
+        var grid = Board.GroupBy(c => c.X).Select(g => g.ToList()).ToList();
+
+        for (int row = 0; row < grid.Count; row++)
+        {
+            for (int col = 0; col < grid[row].Count; col++)
+            {
+                var cell = grid[row][col];
+
+                cell.TopBorderColor = row == 0 ? Colors.Black : Colors.Transparent;
+                cell.BottomBorderColor = row == grid.Count - 1 ? Colors.Black : Colors.Transparent;
+                cell.LeftBorderColor = col == 0 ? Colors.Black : Colors.Transparent;
+                cell.RightBorderColor = col == grid[row].Count - 1 ? Colors.Black : Colors.Transparent;
+            }
+        }
     }
 
     partial void OnGameSettingsChanged(GameSettings value)
