@@ -94,12 +94,17 @@ public partial class GameViewModel : BaseViewModel
             {
                 var cell = grid[row][col];
 
-                cell.TopBorderColor = row == 0 ? Colors.Black : Colors.Transparent;
-                cell.BottomBorderColor = row == grid.Count - 1 ? Colors.Black : Colors.Transparent;
-                cell.LeftBorderColor = col == 0 ? Colors.Black : Colors.Transparent;
-                cell.RightBorderColor = col == grid[row].Count - 1 ? Colors.Black : Colors.Transparent;
+                cell.TopBorderColor = row == 0 ? Colors.Transparent : GetOpositeThemeColor();
+                cell.BottomBorderColor = row == grid.Count - 1 ? Colors.Transparent : GetOpositeThemeColor();
+                cell.LeftBorderColor = col == 0 ? Colors.Transparent : GetOpositeThemeColor();
+                cell.RightBorderColor = col == grid[row].Count - 1 ? Colors.Transparent : GetOpositeThemeColor();
             }
         }
+    }
+
+    private Color GetOpositeThemeColor()
+    {
+        return Application.Current.RequestedTheme == AppTheme.Dark ? Colors.White : Colors.Black;
     }
 
     partial void OnGameSettingsChanged(GameSettings value)
@@ -251,6 +256,11 @@ public partial class GameViewModel : BaseViewModel
     {
         await App.Current.MainPage.DisplayAlert("Game Over", $"{winner} wins!", "OK");
         InitializeBoard();
+    }
+
+    private void OnThemeChanged(object sender, AppThemeChangedEventArgs e)
+    {
+        InitializeCellBorders();
     }
 
     async Task Logout()
