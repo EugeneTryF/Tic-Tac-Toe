@@ -11,15 +11,16 @@ public partial class GameViewModel : BaseViewModel
     GameSettings gameSettings;
 
     bool _isCross = true;
-    string _circle = "circle.png";
-    string _cross = "cross.png";
+
+    public string Circle {  get; set; }
+    public string Cross {  get; set; }
 
     string player1Symbol;
     string player2Symbol;
     string computerSymbol;
 
     [ObservableProperty]
-    string currentTurn = "cross.png";
+    string currentTurn;
 
     [ObservableProperty]
     GameHistoryViewModel? selectedHistoryEntry;
@@ -42,12 +43,39 @@ public partial class GameViewModel : BaseViewModel
         CellClickCommand = new Command(async (cell) => await CellClick((CellViewModel)cell));
         LogoutCommand = new Command(async () => await Logout());
         NavigateToHistoryCommand = new Command<GameHistoryViewModel>(async (entry) => await NavigateToHistory(entry));
+
+        Application.Current.RequestedThemeChanged += OnThemeChanged;
+    }
+
+    private void OnThemeChanged(object sender, AppThemeChangedEventArgs e)
+    {
+        Circle = GetThemedImage("circle_light.png", "circle.png");
+        Cross = GetThemedImage("cross_light.png", "cross.png");
+
+        foreach (var cell in Board)
+        {
+            if (cell.CellValue == "circle.png" || cell.CellValue == "circle_light.png")
+            {
+                cell.CellValue = Circle;
+            }
+            else if (cell.CellValue == "cross.png" || cell.CellValue == "cross_light.png")
+            {
+                cell.CellValue = Cross;
+            }
+        }
+
+        CurrentTurn = _isCross ? Cross : Circle;
+
+        InitializeCellBorders();
     }
 
     void InitializeBoard()
     {
         Board.Clear();
         History.Clear();
+
+        Circle = GetThemedImage("circle_light.png", "circle.png");
+        Cross = GetThemedImage("cross_light.png", "cross.png");
 
         for (int i = 0; i < 3; i++)
         {
@@ -61,19 +89,19 @@ public partial class GameViewModel : BaseViewModel
 
         if (GameSettings.Turn == "X")
         {
-            player1Symbol = _cross;
-            player2Symbol = _circle;
-            computerSymbol = _circle;
+            player1Symbol = Cross;
+            player2Symbol = Circle;
+            computerSymbol = Circle;
             _isCross = true;
-            CurrentTurn = _cross;
+            CurrentTurn = Cross;
         }
         else
         {
-            player1Symbol = _circle;
-            player2Symbol = _cross;
-            computerSymbol = _cross;
+            player1Symbol = Circle;
+            player2Symbol = Cross;
+            computerSymbol = Cross;
             _isCross = true;
-            CurrentTurn = _cross;
+            CurrentTurn = Cross;
 
             if (GameSettings.GameMode == "Vs Computer")
             {
@@ -82,6 +110,11 @@ public partial class GameViewModel : BaseViewModel
         }
 
         AddHistoryEntry("Game Start");
+    }
+
+    private string GetThemedImage(string lightImage, string darkImage)
+    {
+        return Application.Current.RequestedTheme == AppTheme.Dark ? lightImage : darkImage;
     }
 
     void InitializeCellBorders()
@@ -120,7 +153,7 @@ public partial class GameViewModel : BaseViewModel
         if (!string.IsNullOrEmpty(cell.CellValue))
             return;
 
-        cell.CellValue = _isCross ? _cross : _circle;
+        cell.CellValue = _isCross ? Cross : Circle;
 
         AddHistoryEntry($"Turn {History.Count} - {(player1Symbol == CurrentTurn ? GetUserName : GameSettings.GameMode == "Two Players" ? "Player 2" : "Computer")}");
 
@@ -128,7 +161,7 @@ public partial class GameViewModel : BaseViewModel
             return;
 
         _isCross = !_isCross;
-        CurrentTurn = _isCross ? _cross : _circle;
+        CurrentTurn = _isCross ? Cross : Circle;
 
         if (GameSettings.GameMode == "Vs Computer")
         {
@@ -151,7 +184,7 @@ public partial class GameViewModel : BaseViewModel
                 return;
 
             _isCross = !_isCross;
-            CurrentTurn = _isCross ? _cross : _circle;
+            CurrentTurn = _isCross ? Cross : Circle;
         }
     }
 
@@ -188,7 +221,7 @@ public partial class GameViewModel : BaseViewModel
         }
 
         _isCross = targetIndex % 2 == 0;
-        CurrentTurn = _isCross ? _cross : _circle;
+        CurrentTurn = _isCross ? Cross : Circle;
 
         if (GameSettings.GameMode == "Vs Computer" && CurrentTurn == computerSymbol)
         {
@@ -256,11 +289,6 @@ public partial class GameViewModel : BaseViewModel
     {
         await App.Current.MainPage.DisplayAlert("Game Over", $"{winner} wins!", "OK");
         InitializeBoard();
-    }
-
-    private void OnThemeChanged(object sender, AppThemeChangedEventArgs e)
-    {
-        InitializeCellBorders();
     }
 
     async Task Logout()
