@@ -66,6 +66,32 @@ public partial class GameViewModel : BaseViewModel
 
         CurrentTurn = _isCross ? Cross : Circle;
 
+        for (int i = 0; i < History.Count; i++)
+        {
+            var updatedBoardState = new List<string>();
+            foreach (var cellValue in History[i].BoardState)
+            {
+                if (cellValue == "circle.png" || cellValue == "circle_light.png")
+                {
+                    updatedBoardState.Add(Circle);
+                }
+                else if (cellValue == "cross.png" || cellValue == "cross_light.png")
+                {
+                    updatedBoardState.Add(Cross);
+                }
+                else
+                {
+                    updatedBoardState.Add(cellValue);
+                }
+            }
+
+            History[i] = new GameHistoryViewModel
+            {
+                Description = History[i].Description,
+                BoardState = updatedBoardState
+            };
+        }
+
         InitializeCellBorders();
     }
 
